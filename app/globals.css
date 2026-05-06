@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GSM Servizi — Design Tokens
+   Palette "Rosso Pompeiano" — confermata 2026-05-06
+   ============================================================ */
+
+@theme {
+  /* Colors */
+  --color-ink: #0B1220;
+  --color-ink-soft: #1F2937;
+  --color-paper: #FAF7F2;
+  --color-paper-warm: #F5EFE6;
+  --color-accent: #8C1D2C;
+  --color-accent-hover: #731723;
+  --color-accent-soft: #F2E6DC;
+  --color-muted: #6B7280;
+  --color-muted-soft: #9CA3AF;
+  --color-line: #E5E1DA;
+  --color-line-strong: #D1CBC0;
+  --color-success: #15803D;
+  --color-warning: #C2410C;
+  --color-danger: #B91C1C;
+  --color-white: #FFFFFF;
+
+  /* Typography — Fraunces (display) + Inter (body) */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Container */
+  --container-max: 72rem;
+
+  /* Easing */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+}
+
+/* Base */
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  line-height: 1.6;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    color: var(--color-ink);
+  }
+
+  h1 { font-size: clamp(2.25rem, 5vw, 4rem); }
+  h2 { font-size: clamp(1.75rem, 3.6vw, 2.75rem); }
+  h3 { font-size: clamp(1.375rem, 2.4vw, 1.875rem); }
+
+  p { color: var(--color-ink); }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 200ms var(--ease-out-soft);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* Reduced motion — rispetta accessibilità */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Container utility */
+@utility container-page {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Section spacing */
+@utility section-y {
+  padding-block: 4rem;
+
+  @media (min-width: 768px) {
+    padding-block: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-block: 8rem;
+  }
+}
+
+/* Hero overlay used for video bg */
+@utility hero-video-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(11, 18, 32, 0.55) 0%,
+    rgba(11, 18, 32, 0.40) 50%,
+    rgba(11, 18, 32, 0.65) 100%
+  );
+}
+
+/* ============================================================
+   Page Shimmer — splash di apertura con effetto rosso/oro
+   sul testo (background-clip: text)
+   ============================================================ */
+@keyframes page-shimmer-fade {
+  0%, 65% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes page-shimmer-text-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes page-shimmer-pop {
+  0% { transform: scale(0.92); opacity: 0; letter-spacing: 0.05em; }
+  100% { transform: scale(1); opacity: 1; letter-spacing: -0.02em; }
+}
+
+.page-shimmer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.08), transparent 55%),
+    radial-gradient(circle at 70% 70%, rgba(140, 29, 44, 0.10), transparent 55%),
+    var(--color-paper);
+  animation: page-shimmer-fade 4.2s ease-in-out forwards;
+  will-change: opacity;
+}
+
+.page-shimmer-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: page-shimmer-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-shimmer-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 11vw, 7rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(
+    100deg,
+    #8C1D2C 0%,
+    #8C1D2C 30%,
+    #D4AF37 44%,
+    #FFE066 50%,
+    #D4AF37 56%,
+    #8C1D2C 70%,
+    #8C1D2C 100%
+  );
+  background-size: 250% 100%;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: page-shimmer-text-sweep 1.8s ease-in-out infinite;
+  filter: drop-shadow(0 4px 18px rgba(140, 29, 44, 0.18));
+}
+
+.page-shimmer-suffix {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(0.875rem, 1.6vw, 1.25rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-shimmer-overlay { animation: page-shimmer-fade 0.4s ease-out forwards; }
+  .page-shimmer-stage { animation: none; }
+  .page-shimmer-wordmark {
+    animation: none;
+    background-position: 50% 0;
+  }
+}
+
+/* Buttons (token-driven, anti shadcn-clash) */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-weight: 600;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: background-color 200ms var(--ease-out-soft), transform 200ms var(--ease-out-soft);
+  min-height: 2.75rem;
+
+  &:hover { background-color: var(--color-accent-hover); transform: translateY(-1px); }
+  &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--color-ink);
+  font-weight: 600;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line-strong);
+  transition: border-color 200ms var(--ease-out-soft), background-color 200ms var(--ease-out-soft);
+  min-height: 2.75rem;
+
+  &:hover { background-color: var(--color-paper-warm); border-color: var(--color-ink); }
+  &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+}
