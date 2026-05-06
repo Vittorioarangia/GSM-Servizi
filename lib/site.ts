@@ -289,7 +289,6 @@ export const primaryNav = [
   { label: "Studio", href: "/chi-siamo" },
   { label: "Servizi", href: "/servizi" },
   { label: "Settori", href: "/settori" },
-  { label: "Zone", href: "/zone" },
   { label: "Blog", href: "/blog" },
   { label: "Contatti", href: "/contatti" },
 ] as const;
