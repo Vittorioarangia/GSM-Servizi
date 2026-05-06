@@ -47,22 +47,22 @@
   color-scheme: light;
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
-  line-height: 1.6;
-}
-
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.6;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 500;
@@ -76,17 +76,17 @@ body {
   h3 { font-size: clamp(1.375rem, 2.4vw, 1.875rem); }
 
   p { color: var(--color-ink); }
-}
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 200ms var(--ease-out-soft);
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 200ms var(--ease-out-soft);
+  }
 
-::selection {
-  background: var(--color-accent);
-  color: var(--color-white);
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-white);
+  }
 }
 
 /* Reduced motion — rispetta accessibilità */
