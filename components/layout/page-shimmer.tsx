@@ -5,25 +5,29 @@ import { usePathname } from "next/navigation";
 
 import { site } from "@/lib/site";
 
-const SPLASH_DURATION_MS = 4200;
+const INITIAL_DURATION_MS = 4200;
+const NAVIGATION_DURATION_MS = 2000;
 
 export function PageShimmer() {
   const pathname = usePathname();
   const [active, setActive] = useState<boolean>(true);
   const [renderKey, setRenderKey] = useState<number>(0);
   const [prevPathname, setPrevPathname] = useState<string>(pathname);
+  const [isInitial, setIsInitial] = useState<boolean>(true);
 
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
     setActive(true);
+    setIsInitial(false);
     setRenderKey((k) => k + 1);
   }
 
   useEffect(() => {
     if (!active) return;
-    const t = window.setTimeout(() => setActive(false), SPLASH_DURATION_MS);
+    const duration = isInitial ? INITIAL_DURATION_MS : NAVIGATION_DURATION_MS;
+    const t = window.setTimeout(() => setActive(false), duration);
     return () => window.clearTimeout(t);
-  }, [active, renderKey]);
+  }, [active, renderKey, isInitial]);
 
   if (!active) return null;
 

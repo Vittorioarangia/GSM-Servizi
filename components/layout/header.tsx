@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -12,6 +13,11 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [prevPathname, setPrevPathname] = useState<string>(pathname);
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
@@ -108,47 +114,51 @@ export function Header() {
         </div>
       </div>
 
-      <div
-        id="mobile-menu"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu di navigazione"
-        hidden={!open}
-        className={cn(
-          "fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col gap-1 overflow-y-auto bg-paper px-6 py-8 md:hidden"
-        )}
-      >
-        <nav aria-label="Navigazione mobile" className="flex flex-col gap-1">
-          {primaryNav.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "flex min-h-12 items-center rounded-md px-4 py-3 text-base font-medium text-ink transition-colors",
-                  "hover:bg-paper-warm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-                  active && "text-accent"
-                )}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="mt-6 flex flex-col gap-3">
-          <Link href="/analisi-gratuita" className="btn-primary w-full">
-            Analisi gratuita
-          </Link>
-          <a
-            href={`tel:${site.contact.phoneIntl}`}
-            className="btn-secondary w-full"
+      {mounted &&
+        createPortal(
+          <div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu di navigazione"
+            hidden={!open}
+            className={cn(
+              "fixed inset-x-0 top-20 bottom-0 z-50 flex flex-col gap-1 overflow-y-auto bg-paper px-6 py-8 md:hidden"
+            )}
           >
-            Chiama: {site.contact.phone}
-          </a>
-        </div>
-      </div>
+            <nav aria-label="Navigazione mobile" className="flex flex-col gap-1">
+              {primaryNav.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-12 items-center rounded-md px-4 py-3 text-base font-medium text-ink transition-colors",
+                      "hover:bg-paper-warm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                      active && "text-accent"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <div className="mt-6 flex flex-col gap-3">
+              <Link href="/analisi-gratuita" className="btn-primary w-full">
+                Analisi gratuita
+              </Link>
+              <a
+                href={`tel:${site.contact.phoneIntl}`}
+                className="btn-secondary w-full"
+              >
+                Chiama: {site.contact.phone}
+              </a>
+            </div>
+          </div>,
+          document.body
+        )}
     </header>
   );
 }
