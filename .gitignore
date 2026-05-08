@@ -4,6 +4,9 @@
 /node_modules
 /presentazione/node_modules
 /.pnp
+
+# presentazione — PDF export temporanei
+/presentazione/*.pdf
 .pnp.*
 .yarn/*
 !.yarn/patches
