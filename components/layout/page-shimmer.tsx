@@ -17,9 +17,11 @@ export function PageShimmer() {
 
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
-    setActive(true);
-    setIsInitial(false);
-    setRenderKey((k) => k + 1);
+    if (pathname === "/") {
+      setActive(true);
+      setIsInitial(false);
+      setRenderKey((k) => k + 1);
+    }
   }
 
   useEffect(() => {
