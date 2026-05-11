@@ -9,7 +9,7 @@ import { site, team } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Lo studio — Soci e professionisti | GSM Servizi",
   description:
-    "Tre soci, una specializzazione: lo studio GSM Servizi a Roma San Giovanni con oltre 300 clienti.",
+    "Due soci, una specializzazione: lo studio GSM Servizi a Roma San Giovanni.",
   path: "/chi-siamo",
 });
 
@@ -74,8 +74,8 @@ export default function ChiSiamoPage() {
               Lo Studio
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80 md:text-xl">
-              Tre soci, una squadra di professionisti, oltre 300 clienti seguiti
-              tra PMI, farmacie e privati a Roma.
+              Due soci, una squadra di professionisti al servizio di PMI,
+              farmacie e privati a Roma.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function ChiSiamoPage() {
               I soci dello studio
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink/80 md:text-lg">
-              Tre dottori commercialisti iscritti all’Ordine di Roma, ognuno con
+              Due dottori commercialisti iscritti all’Ordine di Roma, ognuno con
               la propria area di specializzazione e una visione comune sulla
               relazione con il cliente.
             </p>

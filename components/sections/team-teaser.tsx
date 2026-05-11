@@ -19,7 +19,7 @@ export function TeamTeaser() {
             Il team
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/80 md:text-lg">
-            Tre soci e una professionista qualificata: persone reali, con esperienza pluriennale
+            Due soci e una professionista qualificata: persone reali, con esperienza
             sul territorio romano.
           </p>
         </div>

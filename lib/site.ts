@@ -17,8 +17,8 @@ export const site = {
     region: "RM",
     postalCode: "00183",
     country: "IT",
-    phone: "+39 06 XXXXXXX",
-    phoneIntl: "+390600000000",
+    phone: "+39 06 77266301",
+    phoneIntl: "+390677266301",
     whatsapp: "+390600000000",
     email: "info@gsmservizi.it",
     pec: "gsmservizi@pec.it",
@@ -242,16 +242,6 @@ export type Membro = {
 };
 
 export const team: Membro[] = [
-  {
-    slug: "marongiu",
-    name: "Dott. Marongiu",
-    role: "Capo dello studio · Socio · Dottore Commercialista",
-    initials: "M",
-    isPartner: true,
-    isLead: true,
-    bio: "Capo dello studio GSM Servizi. Con esperienza pluriennale nella consulenza fiscale e societaria a PMI e SRL romane.",
-    expertise: ["Consulenza societaria", "PMI e SRL", "Operazioni straordinarie"],
-  },
   {
     slug: "gasperini",
     name: "Dott. Giampaolo Gasperini",
